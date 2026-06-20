@@ -1,102 +1,108 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-amber-800 dark:text-amber-400 leading-tight">
-            {{ __('Espace Propriétaire / Bailleur') }}
-        </h2>
-    </x-slot>
+@extends('layouts.dashboard')
 
-    <div class="py-12 bg-gray-50 dark:bg-gray-900 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
-            
-            <!-- Welcome Header -->
-            <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl shadow-xl overflow-hidden text-white p-8 relative">
-                <div class="relative z-10">
-                    <h3 class="text-3xl font-extrabold mb-2">Bienvenue, {{ Auth::user()->name }}</h3>
-                    <p class="text-amber-100 max-w-xl">Publiez de nouvelles annonces de biens immobiliers et suivez leur état de validation par nos agents.</p>
+@section('title', 'Espace Bailleur')
+
+@section('content')
+    <!-- Welcome Banner -->
+    <div class="card border-0 text-white mb-4 rounded-3 overflow-hidden" style="background: linear-gradient(135deg, #f59e0b, #ea580c);">
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="fw-bold mb-1">Bienvenue, {{ Auth::user()->name }}</h3>
+                    <p class="mb-0 opacity-75">Publiez vos annonces immobilières et suivez leur état de validation.</p>
                 </div>
-                <div class="absolute right-0 bottom-0 top-0 opacity-10 flex items-center justify-center pointer-events-none">
-                    <svg class="w-64 h-64 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z"/></svg>
+                <div class="col-auto d-none d-md-block">
+                    <i class="bi bi-building display-4 opacity-50"></i>
                 </div>
             </div>
-
-            <!-- Bailleur Stats Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Stat 1: Total Properties -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Total Propriétés</p>
-                    <h4 class="text-3xl font-bold text-gray-800 dark:text-white mt-1">{{ Auth::user()->propertiesOwned()->count() }}</h4>
-                </div>
-
-                <!-- Stat 2: Published Properties -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Annonces Publiées</p>
-                    <h4 class="text-3xl font-bold text-emerald-600 mt-1">{{ Auth::user()->propertiesOwned()->where('status', 'publiee')->count() }}</h4>
-                </div>
-
-                <!-- Stat 3: Pending Validation -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">En attente de validation</p>
-                    <h4 class="text-3xl font-bold text-amber-500 mt-1">{{ Auth::user()->propertiesOwned()->where('status', 'en_attente')->count() }}</h4>
-                </div>
-
-                <!-- Stat 4: Refused / Retired -->
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Refusées ou Retirées</p>
-                    <h4 class="text-3xl font-bold text-rose-500 mt-1">{{ Auth::user()->propertiesOwned()->whereIn('status', ['refusee', 'retiree'])->count() }}</h4>
-                </div>
-            </div>
-
-            <!-- List of Deposited Properties -->
-            <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                <div class="flex justify-between items-center mb-6">
-                    <h4 class="text-xl font-bold text-gray-800 dark:text-white">Mes Propriétés Déposées</h4>
-                    <button class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl text-sm transition">
-                        Ajouter un bien
-                    </button>
-                </div>
-
-                @if(Auth::user()->propertiesOwned->isEmpty())
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">Vous n'avez pas encore déposé de biens immobiliers.</p>
-                @else
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead>
-                                <tr class="border-b border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500 font-semibold uppercase text-xs">
-                                    <th class="py-3 px-4">Titre</th>
-                                    <th class="py-3 px-4">Type</th>
-                                    <th class="py-3 px-4">Usage / Option</th>
-                                    <th class="py-3 px-4">Prix</th>
-                                    <th class="py-3 px-4">Statut</th>
-                                    <th class="py-3 px-4">Date de dépôt</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(Auth::user()->propertiesOwned()->latest()->get() as $property)
-                                    <tr class="border-b border-gray-100 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-750 transition">
-                                        <td class="py-4 px-4 font-semibold text-gray-900 dark:text-white">{{ $property->title }}</td>
-                                        <td class="py-4 px-4"><span class="capitalize">{{ $property->type }}</span></td>
-                                        <td class="py-4 px-4">
-                                            <span class="capitalize text-xs font-semibold px-2 py-0.5 bg-gray-100 dark:bg-gray-750 text-gray-600 dark:text-gray-400 rounded">{{ $property->usage }}</span>
-                                            <span class="text-xs font-bold uppercase ml-1 {{ $property->option === 'vente' ? 'text-rose-600' : 'text-indigo-600' }}">{{ $property->option }}</span>
-                                        </td>
-                                        <td class="py-4 px-4 font-bold">{{ number_format($property->price, 2) }} DT</td>
-                                        <td class="py-4 px-4">
-                                            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full 
-                                                {{ $property->status === 'publiee' ? 'bg-emerald-100 text-emerald-800' : 
-                                                   ($property->status === 'refusee' ? 'bg-rose-100 text-rose-800' : 
-                                                   ($property->status === 'retiree' ? 'bg-gray-100 text-gray-800' : 'bg-amber-100 text-amber-800')) }}">
-                                                {{ ucfirst(str_replace('_', ' ', $property->status)) }}
-                                            </span>
-                                        </td>
-                                        <td class="py-4 px-4 text-gray-400 dark:text-gray-500">{{ $property->created_at->format('d/m/Y') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @endif
-            </div>
-
         </div>
     </div>
-</x-app-layout>
+
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-3">
+                    <p class="text-muted mb-1 small">Total Propriétés</p>
+                    <h3 class="fw-bold mb-0">{{ Auth::user()->propertiesOwned()->count() }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-3">
+                    <p class="text-muted mb-1 small">Publiées</p>
+                    <h3 class="fw-bold text-success mb-0">{{ Auth::user()->propertiesOwned()->where('status', 'publiee')->count() }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-3">
+                    <p class="text-muted mb-1 small">En attente</p>
+                    <h3 class="fw-bold text-warning mb-0">{{ Auth::user()->propertiesOwned()->where('status', 'en_attente')->count() }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-3">
+                    <p class="text-muted mb-1 small">Refusées / Retirées</p>
+                    <h3 class="fw-bold text-danger mb-0">{{ Auth::user()->propertiesOwned()->whereIn('status', ['refusee', 'retiree'])->count() }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Properties Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h5 class="fw-bold mb-0">Mes Propriétés Déposées</h5>
+            <a href="{{ route('bailleur.properties.create') }}" class="btn btn-warning btn-sm rounded-pill px-3">
+                <i class="bi bi-plus-circle me-1"></i>Ajouter un bien
+            </a>
+        </div>
+        <div class="card-body p-0">
+            @if(Auth::user()->propertiesOwned->isEmpty())
+                <p class="text-muted p-4 mb-0">Vous n'avez pas encore déposé de biens immobiliers.</p>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="small text-uppercase text-muted fw-semibold">Titre</th>
+                                <th class="small text-uppercase text-muted fw-semibold">Type</th>
+                                <th class="small text-uppercase text-muted fw-semibold">Usage / Option</th>
+                                <th class="small text-uppercase text-muted fw-semibold">Prix</th>
+                                <th class="small text-uppercase text-muted fw-semibold">Statut</th>
+                                <th class="small text-uppercase text-muted fw-semibold">Date de dépôt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(Auth::user()->propertiesOwned()->latest()->get() as $property)
+                                <tr>
+                                    <td class="fw-semibold">{{ $property->title }}</td>
+                                    <td class="text-capitalize">{{ $property->type }}</td>
+                                    <td>
+                                        <span class="badge bg-light text-dark">{{ ucfirst($property->usage) }}</span>
+                                        <span class="badge {{ $property->option === 'vente' ? 'bg-danger' : 'bg-primary' }} bg-opacity-10 {{ $property->option === 'vente' ? 'text-danger' : 'text-primary' }}">{{ ucfirst($property->option) }}</span>
+                                    </td>
+                                    <td class="fw-bold">{{ number_format($property->price, 2) }} DT</td>
+                                    <td>
+                                        <span class="badge rounded-pill
+                                            {{ $property->status === 'publiee' ? 'bg-success' :
+                                               ($property->status === 'refusee' ? 'bg-danger' :
+                                               ($property->status === 'retiree' ? 'bg-secondary' : 'bg-warning text-dark')) }}">
+                                            {{ ucfirst(str_replace('_', ' ', $property->status)) }}
+                                        </span>
+                                    </td>
+                                    <td class="text-muted small">{{ $property->created_at->format('d/m/Y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+    </div>
+@endsection

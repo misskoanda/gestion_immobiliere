@@ -38,16 +38,21 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $isClient = ($request->role ?? 'client') === 'client';
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'role' => $request->role ?? 'client',
             'password' => Hash::make($request->password),
-            'is_active' => true,
+            'is_active' => !$isClient,
         ]);
 
         event(new Registered($user));
+
+        if ($isClient) {
+            return redirect(route('login'))->with('status', 'Votre inscription a bien été enregistrée. Votre compte est en attente de validation par le manager.');
+        }
 
         Auth::login($user);
 

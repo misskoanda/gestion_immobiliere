@@ -50,6 +50,14 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        $user = Auth::user();
+        if (!$user->is_active) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => "Votre compte n'est pas encore validé par le manager ou est désactivé.",
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 
