@@ -3,6 +3,14 @@ Author       : theme_ocean
 Template Name: Eduleb - Education HTML Template
 Version      : 1.0
 */
+:root {
+  --brand-primary: #0a3d8f;
+  --brand-primary-dark: #072a58;
+  --brand-accent: #0db7ff;
+  --brand-text: #0b104a;
+  --brand-muted: #6b7280;
+}
+
 /*=============================================================
     CSS INDEX
     =============================
@@ -530,7 +538,6 @@ border: 1px solid #525fe1!important;
 	display: block;
 	font-size: 20px;
 	height: 60px;
-	position: absolute;
 	right: 5px;
 	top: 5px;
 	padding: 0 20px;

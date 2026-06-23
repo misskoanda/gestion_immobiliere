@@ -1,9 +1,9 @@
 <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
   <div class="sidebar-header">
-    <a class="brand-mark" href="{{ route('dashboard') }}" aria-label="ImmoGestion dashboard">
+    <a class="brand-mark" href="{{ route('dashboard') }}" aria-label="ImmoManager dashboard">
       <span class="brand-icon"><i class="bi bi-houses-fill" aria-hidden="true"></i></span>
       <span class="brand-copy">
-        <span class="brand-title">ImmoGestion</span>
+        <span class="brand-title">ImmoManager</span>
         <span class="brand-subtitle">Espace {{ ucfirst(Auth::user()->role) }}</span>
       </span>
     </a>
@@ -37,10 +37,7 @@
         <span class="nav-icon"><i class="bi bi-building" aria-hidden="true"></i></span>
         <span class="nav-text">Mes annonces</span>
       </a>
-      <a class="nav-link" href="#" onclick="alert('Fonctionnalité d\'ajout d\'annonce à intégrer');">
-        <span class="nav-icon"><i class="bi bi-plus-circle" aria-hidden="true"></i></span>
-        <span class="nav-text">Ajouter une annonce</span>
-      </a>
+      
 
     @elseif(Auth::user()->role === 'agent')
       <a class="nav-link {{ request()->routeIs('agent.dashboard') ? 'active' : '' }}" href="{{ route('agent.dashboard') }}">
@@ -97,13 +94,10 @@
   </nav>
 
   <div class="sidebar-user">
-    <img class="avatar-img avatar-md sidebar-user-avatar" src="{{ asset('dashboard-assets/images/avatar/avatar.jpg') }}" alt="{{ Auth::user()->name }}">
+    
     <strong>{{ Auth::user()->name }}</strong>
     <small>Rôle : {{ ucfirst(Auth::user()->role) }}</small>
   </div>
 
-  <div class="sidebar-footer">
-    <span class="status-dot"></span>
-    <span class="sidebar-footer-text">Système en ligne</span>
-  </div>
+  
 </aside>

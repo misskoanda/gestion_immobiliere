@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'Accueil - Gestion Immobilière Premium')
+@section('title', 'Accueil - ImmoManager Premium')
 
 @section('content')
     <!-- START HOME -->
@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-7 col-sm-12 col-xs-12">
                     <div class="hero-text ht_top">
-                        <h1><span>ImmoGestion</span> Trouvez le bien immobilier idéal</h1>
+                        <h1><span>ImmoManager</span> Trouvez le bien immobilier idéal</h1>
                         <p class="lead text-white bg-dark bg-opacity-25 p-2 rounded">
                             Découvrez notre sélection de villas, appartements, terrains et locaux commerciaux en Tunisie.
                         </p>
@@ -78,7 +78,7 @@
                     <div class="single-counter text-center p-3">
                         <span class="ti-check-box text-primary font-30 mb-2 d-block"></span>
                         <h2 class="counter-num font-weight-bold">{{ \App\Models\Property::count() }}</h2>
-                        <p class="text-muted">Biens Totaux référencés</p>
+                        <p class="text-muted">Biens Totaux </p>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                                     @endif
                                 </div>
                                 <div class="border-top pt-3 d-flex justify-content-between align-items-center mt-3">
-                                    <div class="price font-weight-extrabold text-primary font-20">{{ number_format($property->price, 2) }} DT</div>
+                                    <div class="price font-weight-extrabold text-primary font-20">{{ number_format($property->price, 2) }} FCFA</div>
                                     <a href="{{ route('properties.show', $property) }}" class="btn btn-outline-primary btn-sm px-3 rounded-pill">Détails</a>
                                 </div>
                             </div>

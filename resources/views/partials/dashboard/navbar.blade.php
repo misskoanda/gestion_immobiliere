@@ -13,11 +13,13 @@
 
       <div class="dropdown">
         <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img class="avatar-img avatar-sm" src="{{ asset('dashboard-assets/images/avatar/avatar.jpg') }}" alt="{{ Auth::user()->name }}">
+          <span class="profile-avatar" aria-hidden="true">
+            <i class="bi bi-person-circle"></i>
+          </span>
           <span class="profile-name d-none d-sm-inline">{{ Auth::user()->name }}</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Mon profil</a></li>
+          <!-- <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Mon profil</a></li> -->
           <li><a class="dropdown-item" href="{{ route('home') }}">Retour au site</a></li>
           <li><hr class="dropdown-divider"></li>
           <li>

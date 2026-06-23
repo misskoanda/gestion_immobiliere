@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', $property->title . ' - ImmoGestion')
+@section('title', $property->title . ' - ImmoManager')
 
 @section('content')
     <!-- BREADCRUMB -->
@@ -56,7 +56,7 @@
                                 <p class="text-muted"><i class="ti-location-pin"></i> {{ $property->location }}</p>
                             </div>
                             <div class="text-end">
-                                <h3 class="text-primary font-weight-extrabold mb-0">{{ number_format($property->price, 2) }} DT</h3>
+                                <h3 class="text-primary font-weight-extrabold mb-0">{{ number_format($property->price, 2) }} FCFA</h3>
                                 <small class="text-muted">{{ $property->option === 'location' ? '/ mois' : '' }}</small>
                             </div>
                         </div>

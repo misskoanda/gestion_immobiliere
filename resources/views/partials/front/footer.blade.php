@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="single_footer">
-                    <a href="{{ route('home') }}"><img src="{{ asset('front/img/logo.png') }}" alt="Logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('front/img/logo1.jpeg') }}" class="img-fluid" alt="ImmoManager"></a>
                     <p>Votre partenaire de confiance pour la recherche et la gestion de vos biens immobiliers. Simplifiez vos démarches de location, vente et acquisition.</p>
                     <div class="social_profile">
                         <ul>
@@ -42,15 +42,15 @@
                     <h4>Contact Info</h4>
                     <div class="sf_contact">
                         <span class="ti-map"></span>
-                        <p>Avenue Habib Bourguiba, Tunis, Tunisie</p>
+                        <p>Avenue Thomas SANKARA, Ouagadougou, Burkina Faso</p>
                     </div>
                     <div class="sf_contact">
                         <span class="ti-mobile"></span>
-                        <p>+216 71 000 000</p>
+                        <p>+226 71 000 000</p>
                     </div>
                     <div class="sf_contact">
                         <span class="ti-email"></span>
-                        <p>contact@immo-gestion.com</p>
+                        <p>contact@immo-manager.com</p>
                     </div>
                 </div>
             </div><!--- END COL -->
@@ -62,7 +62,7 @@
 <!-- START FOOTER COPYRIGHT -->
 <div class="foot_copy">
     <div class="footer_copyright">
-        <p>&copy; {{ date('Y') }}. Tous droits réservés • Distribué par <a href="#">ThemeWagon</a></p>
+        <p>&copy; {{ date('Y') }}. Tous droits réservés • Distribué par <a href="#">KOANDA-NABOU Solutions</a></p>
     </div>
 </div>
 <!-- END FOOTER COPYRIGHT -->

@@ -42,7 +42,7 @@
                                     <td>
                                         <span class="badge {{ $property->option === 'vente' ? 'bg-danger' : 'bg-primary' }} bg-opacity-10 {{ $property->option === 'vente' ? 'text-danger' : 'text-primary' }}">{{ ucfirst($property->option) }}</span>
                                     </td>
-                                    <td class="fw-bold small">{{ number_format($property->price, 2) }} DT</td>
+                                    <td class="fw-bold small">{{ number_format($property->price, 2) }} FCFA</td>
                                     <td>
                                         <span class="badge rounded-pill
                                             {{ $property->status === 'publiee' ? 'bg-success' :

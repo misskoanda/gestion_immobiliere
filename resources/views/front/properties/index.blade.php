@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'Propriétés Disponibles - ImmoGestion')
+@section('title', 'Propriétés Disponibles - ImmoManager')
 
 @section('content')
     <!-- START PROPERTIES BANNER -->
@@ -24,7 +24,7 @@
                         <form action="{{ route('properties.index') }}" method="GET" class="space-y-4">
                             <!-- Type Filter -->
                             <div class="mb-3">
-                                <label for="type" class="form-label text-muted text-xs font-weight-bold uppercase">Type de Bien</label>
+                                <label for="type" class="form-label text-muted text-xs font-weight-bold uppercase">Type de bien</label>
                                 <select id="type" name="type" class="form-select border bg-light py-2" onchange="this.form.submit()">
                                     <option value="">Tous</option>
                                     <option value="villa" {{ request('type') === 'villa' ? 'selected' : '' }}>Villa</option>
@@ -83,7 +83,7 @@
                                             @endif
                                         </div>
                                         <div class="border-top pt-3 d-flex justify-content-between align-items-center mt-3">
-                                            <div class="price font-weight-extrabold text-primary font-18">{{ number_format($property->price, 2) }} DT</div>
+                                            <div class="price font-weight-extrabold text-primary font-18">{{ number_format($property->price, 2) }} FCFA</div>
                                             <a href="{{ route('properties.show', $property) }}" class="btn btn-outline-primary btn-sm px-3 rounded-pill">Détails</a>
                                         </div>
                                     </div>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Espace d'administration de Gestion Immobilière">
+    <meta name="description" content="Espace d'administration ImmoManager">
     
-    <title>@yield('title', 'Tableau de Bord') | ImmoGestion</title>
+    <title>@yield('title', 'Tableau de Bord') | ImmoManager</title>
 
     <link rel="stylesheet" href="{{ asset('dashboard-assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard-assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
